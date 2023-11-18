@@ -45,33 +45,63 @@ describe('review test', () => {
 
         });
 
-        it('allows user to input then reset the review', () => {
-            // 填写名字和评论内容
-            cy.get('input[name="author"]').type('hpl');
-            cy.get('textarea[name="review"]').type('my all time favourite movie !!!!!!!!!');
-            cy.get("li").eq(0).click(); // 选择第一个5分
+        // passability test
+        describe("review page passability test", () => {
+            it('allows user to input then reset the review', () => {
+                // 填写名字和评论内容
+                cy.get('input[name="author"]').type('hpl');
+                cy.get('textarea[name="review"]').type('my all time favourite movie !!!!!!!!!');
+                cy.get("li").eq(0).click(); // 选择第一个5分
 
-            // 点击重置按钮
-            cy.get('button[type="reset"]').click();
+                // 点击重置按钮
+                cy.get('button[type="reset"]').click();
 
-            // 验证表单是否被重置
-            cy.get('input[name="author"]').should('have.value', '');
-            cy.get('textarea[name="review"]').should('have.value', '');
-            cy.get('#select-rating').contains('Average'); // 替换为默认评分值
+                // 验证表单是否被重置
+                cy.get('input[name="author"]').should('have.value', '');
+                cy.get('textarea[name="review"]').should('have.value', '');
+                cy.get('#select-rating').contains('Average'); // 替换为默认评分值
+            });
+
+            it('allows user to submit a review', () => {
+                // 填写评论者的名字和评论内容
+                cy.get('input[name="author"]').type('jhc');
+                cy.get('textarea[name="review"]').type('I dont like the movie in the genre');
+                cy.get("li").eq(4).click(); // 给第五个1分
+
+                // 提交表单
+                cy.get('button[type="submit"]').click();
+
+                // 验证评论是否成功发布
+                cy.get('h4').contains('Thank you for submitting a review');
+            });
         });
 
-        it('allows user to submit a review', () => {
-            // 填写评论者的名字和评论内容
-            cy.get('input[name="author"]').type('jhc');
-            cy.get('textarea[name="review"]').type('I dont like the movie in the genre');
-            cy.get("li").eq(4).click(); // 给第五个1分
 
-            // 提交表单
-            cy.get('button[type="submit"]').click();
+        // failure test
+        describe("review page error test", () => {
 
-            // 验证评论是否成功发布
-            cy.get('h4').contains('Thank you for submitting a review');
-        });
+            // submit directly
+            it("submit the review form directly", () => {
+                cy.get('button[type="submit"]').click();
+                cy.get('p').contains("Name is required")
+                cy.get('p').contains("Review cannot be empty.")
+            })
+
+            // submit only author name
+            it("submit only with author name", () => {
+                cy.get('input[name="author"]').type('hpl')
+                cy.get('button[type="submit"]').click();
+                cy.get('p').contains("Review cannot be empty.")
+            })
+
+            // submit with author name but review text is too short
+            it("submit with author name and short review text", () => {
+                cy.get('input[name="author"]').type('jhc')
+                cy.get('textarea[name="review"]').type('nice')
+                cy.get('button[type="submit"]').click();
+                cy.get('p').contains("Review is too short")
+            })
+        })
     })
 })
 
