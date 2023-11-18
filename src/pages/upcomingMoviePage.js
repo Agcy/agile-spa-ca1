@@ -1,6 +1,6 @@
 import React from "react";
 import { getUpcomingMovie } from "../api/tmdb-api";
-import PageTemplate from '../components/templateMovieListPage'
+import PageTemplate from '../components/movie/templateMovieListPage'
 import AddToPreviewsIcon from '../components/cardIcons/addToPreviews'
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
@@ -14,7 +14,7 @@ const UpcomingMoviePage = (props) => {
 
   if (isError) {
     return <h1>{error.message}</h1>
-  }  
+  }
   const movies = data.results;
   const favorites = movies.filter(m => m.upcoming)
   localStorage.setItem('favorites', JSON.stringify(favorites))

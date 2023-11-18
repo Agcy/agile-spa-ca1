@@ -1,5 +1,5 @@
 import React from "react";
-import MovieListHeader from "../components/headerMovieList";
+import MovieListHeader from "../components/movie/headerMovieList";
 
 export default {
   title: "Home Page/Header",

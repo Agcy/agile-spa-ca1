@@ -1,5 +1,5 @@
 import React from "react";
-import MovieDetails from "../components/movieDetails";
+import MovieDetails from "../components/movie/movieDetails";
 import SampleMovie from "./sampleData";
 
 export default {

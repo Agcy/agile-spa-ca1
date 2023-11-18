@@ -1,5 +1,5 @@
 import React from "react";
-import FilterMoviesCard from "../components/filterMoviesCard";
+import FilterMoviesCard from "../components/movie/filterMoviesCard";
 
 export default {
   title: "Home Page/FilterMoviesCard",
