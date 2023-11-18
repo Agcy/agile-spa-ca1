@@ -29,7 +29,7 @@ describe('upcoming test', () => {
     });
 
     // 测试电影卡片显示是否正确
-    it('电影卡片应包含标题和海报', () => {
+    it('movie cards should including title and poster', () => {
       cy.get(".MuiCardHeader-content").each(($card, index) => {
         cy.wrap($card).find("p").contains(movies[index].title);
       });
