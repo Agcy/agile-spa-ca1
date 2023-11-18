@@ -11,13 +11,14 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import SiteHeader from './components/siteHeader';
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import UpcomingMoviePage from './pages/upcomingMoviePage';
-import MarkedMoviesPage from './pages/markedMoviesPage'
+import MarkedMoviesPage from './pages/markedMoviesPage';
+import ActorListPage from "./pages/actorListPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 360000,
-      refetchInterval: 360000, 
+      refetchInterval: 360000,
       refetchOnWindowFocus: false
     },
   },
@@ -32,6 +33,7 @@ const App = () => {
           <Routes>
             <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
             <Route path="/movies/marked" element={<MarkedMoviesPage />} />
+            <Route path="/actor" element={<ActorListPage />} />
             <Route path="/movies/upcoming" element={<UpcomingMoviePage />} />
             <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
             <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />

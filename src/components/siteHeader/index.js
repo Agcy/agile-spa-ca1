@@ -20,12 +20,13 @@ const SiteHeader = ({ history }) => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  
+
   const navigate = useNavigate();
 
   const menuOptions = [
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favorites" },
+    { label: "Actor", path: "/actor"},
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Marked", path: "/movies/marked" },
   ];

@@ -86,3 +86,21 @@ export const getUpcomingMovie = () => {
      throw error
   });
 }
+
+export const getActor = ({ queryKey }) => {
+  const [, { id }] = queryKey;
+  return fetch(
+      `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  ).then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  });
+};
+
+export const getPopularActors = (language) => {
+  return fetch(
+      `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=${language}`
+  ).then(response => response.json());
+};
