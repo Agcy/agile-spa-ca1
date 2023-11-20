@@ -31,7 +31,7 @@ describe('review test', () => {
 
     describe("The review page", () => {
         beforeEach(() => {
-            // Select two favourites and navigate to Favourites page
+            // navigate to Favourites page
             cy.get("button[aria-label='add to favorites']").eq(1).click();
             cy.get("button[aria-label='add to favorites']").eq(3).click();
             cy.get("button").contains("Favorites").click();
