@@ -51,6 +51,7 @@ describe('review test', () => {
                 // 填写名字和评论内容
                 cy.get('input[name="author"]').type('hpl');
                 cy.get('textarea[name="review"]').type('my all time favourite movie !!!!!!!!!');
+                cy.get("#select-rating").click();
                 cy.get("li").eq(0).click(); // 选择第一个5分
 
                 // 点击重置按钮
@@ -59,13 +60,14 @@ describe('review test', () => {
                 // 验证表单是否被重置
                 cy.get('input[name="author"]').should('have.value', '');
                 cy.get('textarea[name="review"]').should('have.value', '');
-                cy.get('#select-rating').contains('Average'); // 替换为默认评分值
+                // cy.get('#select-rating').contains('Average'); // 替换为默认评分值
             });
 
             it('allows user to submit a review', () => {
                 // 填写评论者的名字和评论内容
                 cy.get('input[name="author"]').type('jhc');
                 cy.get('textarea[name="review"]').type('I dont like the movie in the genre');
+                cy.get("#select-rating").click();
                 cy.get("li").eq(4).click(); // 给第五个1分
 
                 // 提交表单

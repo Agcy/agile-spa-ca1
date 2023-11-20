@@ -52,7 +52,7 @@ describe('upcoming test', () => {
     beforeEach(() => {
       cy.visit(`/movies/${movies[0].id}`);
     });
-    it(" displays the movie title, overview and genres and ", () => {
+    it(" displays the movie title, overview and genres ", () => {
       cy.get("h3").contains(movie.title);
       cy.get("h3").contains("Overview");
       cy.get("h3").next().contains(movie.overview);

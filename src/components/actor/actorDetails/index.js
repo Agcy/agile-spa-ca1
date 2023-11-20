@@ -27,7 +27,7 @@ const ActorDetails = ({ actor }) => {
 
             <Paper component="ul" sx={{ ...root }}>
                 <Chip label={`Born: ${formatDate(actor.birthday)}`} sx={{ ...chip }} />
-                {actor.place_of_birth && <Chip label={`Birthplace: ${actor.place_of_birth}`} sx={{ ...chip }} />}
+                {<Chip label={`Birthplace: ${actor.place_of_birth}`} sx={{ ...chip }} />}
                 {/* 其他相关信息的展示 */}
             </Paper>
 
