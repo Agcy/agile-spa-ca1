@@ -1,5 +1,5 @@
-let actors; // List of movies from TMDB
-let actor; //
+let actors;
+let actor;
 
 // 主页面测试
 // 即将上映电影页面测试
