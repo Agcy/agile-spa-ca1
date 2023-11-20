@@ -111,67 +111,67 @@ const SiteHeader = ({ history }) => {
   };
 
   return (
-      <>
-        <AppBar position="fixed" color="secondary">
-          <Toolbar>
-            <Typography variant="h4" sx={{ flexGrow: 1 }}>
-              TMDB Client
-            </Typography>
-            <Typography variant="h6" sx={{ flexGrow: 1 }}>
-              All you ever wanted to know about Movies!
-            </Typography>
+    <>
+      <AppBar position="fixed" color="secondary">
+        <Toolbar>
+          <Typography variant="h4" sx={{ flexGrow: 1 }}>
+            TMDB Client
+          </Typography>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            All you ever wanted to know about Movies!
+          </Typography>
             {isMobile ? (
-                <>
-                  <IconButton
-                      aria-label="menu"
-                      aria-controls="menu-appbar"
-                      aria-haspopup="true"
-                      onClick={handleMenu}
-                      color="inherit"
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <Menu
-                      id="menu-appbar"
-                      anchorEl={anchorEl}
-                      anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      open={open}
-                      onClose={() => setAnchorEl(null)}
-                  >
-                    {menuOptions.map((opt) => (
-                        <MenuItem
-                            key={opt.label}
-                            onClick={() => handleMenuSelect(opt.path)}
-                        >
-                          {opt.label}
-                        </MenuItem>
-                    ))}
-                  </Menu>
-                </>
-            ) : (
-                <>
+              <>
+                <IconButton
+                  aria-label="menu"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={open}
+                  onClose={() => setAnchorEl(null)}
+                >
                   {menuOptions.map((opt) => (
-                      <Button
-                          key={opt.label}
-                          color="inherit"
-                          onClick={() => handleMenuSelect(opt.path)}
-                      >
-                        {opt.label}
-                      </Button>
+                    <MenuItem
+                      key={opt.label}
+                      onClick={() => handleMenuSelect(opt.path)}
+                    >
+                      {opt.label}
+                    </MenuItem>
                   ))}
-                </>
+                </Menu>
+              </>
+            ) : (
+              <>
+                {menuOptions.map((opt) => (
+                  <Button
+                    key={opt.label}
+                    color="inherit"
+                    onClick={() => handleMenuSelect(opt.path)}
+                  >
+                    {opt.label}
+                  </Button>
+                ))}
+              </>
             )}
             <div>
-              <Avatar src="/broken-image.jpg">
-                {myContent.map((anchor) => (
+                <Avatar src="/broken-image.jpg">
+                  {myContent.map((anchor) => (
                     <React.Fragment key={anchor.direction}>
                       <Button onClick={toggleDrawer(anchor.direction, true)}>{anchor.label}</Button>
                       <SwipeableDrawer
@@ -183,13 +183,13 @@ const SiteHeader = ({ history }) => {
                         {list(anchor)}
                       </SwipeableDrawer>
                     </React.Fragment>
-                ))}
-              </Avatar>
+                  ))}
+                </Avatar>
             </div>
-          </Toolbar>
-        </AppBar>
-        <Offset />
-      </>
+        </Toolbar>
+      </AppBar>
+      <Offset />
+    </>
   );
 };
 

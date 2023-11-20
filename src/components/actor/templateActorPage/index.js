@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {getActorImages, getActorMovieCredits} from "../../../api/tmdb-api";
-import RelativeMoviesList from "../../relativeInformation/relativeMoviesList";
+import RelativeMoviesList from "../../relativeInfomation/relativeMoviesList";
 import { useQuery } from "react-query";
 import Spinner from '../../spinner';
 
