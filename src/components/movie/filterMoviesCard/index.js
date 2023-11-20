@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect}  from "react";
 import { useQuery } from "react-query";
 import Spinner from '../../spinner'
 import Card from "@mui/material/Card";
@@ -24,6 +24,20 @@ const formControl =
 export default function FilterMoviesCard(props) {
 
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
+
+  const [blurAmount, setBlurAmount] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newBlur = Math.min(scrollY / 100, 10); // 限制最大模糊值
+      setBlurAmount(newBlur);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   if (isLoading) {
     return <Spinner />;
@@ -52,18 +66,33 @@ export default function FilterMoviesCard(props) {
 
   return (
     <Card
-      sx={{
-        maxWidth: 345,
-        backgroundColor: "rgb(204, 204, 0)"
-      }}
-      variant="outlined">
-      <CardContent>
+        sx={{
+          maxWidth: 1800,
+          position: 'relative' // 添加相对定位
+        }}
+        variant="outlined"
+    >
+      <CardMedia
+          sx={{
+            height: 900,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            filter: `blur(${blurAmount}px)` // 应用模糊
+          }} // 设置绝对定位
+          image={img}
+          title="Filter"
+      />
+      <CardContent
+          sx={{ position: 'relative', zIndex: 2 }} // 确保内容在图片之上
+      >
         <Typography variant="h5" component="h1">
           <SearchIcon fontSize="large" />
           Filter the movies.
         </Typography>
         <TextField
-          sx={{...formControl}}
+          sx={{...formControl, maxWidth: 1800}}
           id="filled-search"
           label="Search field"
           type="search"
@@ -91,7 +120,7 @@ export default function FilterMoviesCard(props) {
         </FormControl>
       </CardContent>
       <CardMedia
-        sx={{ height: 300 }}
+        sx={{ height: 900 }}
         image={img}
         title="Filter"
       />

@@ -4,6 +4,7 @@ import ActorListPageTemplate from '../components/actor/templeteActorListPage'
 import AddToPreviewsIcon from '../components/cardIcons/addToPreviews'
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
+import AddToFollowedActorsIcon from "../components/cardIcons/addToFollowedActorsIcon";
 
 const ActorListPage = (props) => {
     const {  data, error, isLoading, isError }  = useQuery('actor', getPopularActors)
@@ -26,8 +27,8 @@ const ActorListPage = (props) => {
         <ActorListPageTemplate
             title='Popular Actor'
             actors={actors}
-            action={(movie) => {
-                return <AddToPreviewsIcon movie={movie} />
+            action={(actor) => {
+                return <AddToFollowedActorsIcon actor={actor} />
             }}
         />
     );
