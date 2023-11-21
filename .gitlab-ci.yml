@@ -47,4 +47,5 @@ e2e_test_job:
     - echo "Run tests in headless mode"
     - npx start-server-and-test "npx serve -s build" http://localhost:3000 "cypress run"
   only:
-    - develop
+    - main
+    - merge_requests
