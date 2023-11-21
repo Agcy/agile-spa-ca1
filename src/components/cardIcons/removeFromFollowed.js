@@ -13,7 +13,7 @@ const RemoveFromFollowedIcon = ({ actor }) => {
     };
     return (
         <IconButton
-            aria-label="remove from favorites"
+            aria-label="remove from following"
             onClick={handleRemoveFromFollowed}
         >
             <Button variant="outlined" color="error">
