@@ -73,15 +73,6 @@ describe('movie detail test', () => {
                 cy.get("h3").contains(actor.name);
                 cy.get("h3").contains("Biography");
                 cy.get("h3").next().contains(actor.biography);
-                // cy.get("p")
-                //     .next()
-                //     .within(() => {
-                //         const genreChips = movie.genres.map((g) => g.name);
-                //         genreChips.unshift("Genres");
-                //         cy.get("span").each(($card, index) => {
-                //             cy.wrap($card).contains(genreChips[index]);
-                //         });
-                //     });
             });
             it(" displays the movie list which the actor be a role in this movie", () => {
                 cy.goToMoviePage(movie.id)
