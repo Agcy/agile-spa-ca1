@@ -18,7 +18,7 @@ describe('upcoming test', () => {
             });
     });
     beforeEach(() => {
-        cy.visit("/actor");
+        cy.visit("/actors");
     });
 
     // 测试页面是否成功加载
