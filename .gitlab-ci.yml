@@ -41,13 +41,10 @@ build_job:
     - main
 
 e2e_test_job:
+  image: cypress/browsers:node16.13.0-chrome95-ff94
   stage: e2e_test
   script:
     - echo "Run tests in headless mode"
-    - npx serve -s ./build  -l 3000  &
-    - npx cypress run --browser chrome
+    - npx start-server-and-test "npx serve -s build" http://localhost:3000 "cypress run"
   only:
-    - main
-    - merge_requests
-
-
+    - develop
