@@ -34,7 +34,13 @@ describe('review test', () => {
             // navigate to Favourites page
             cy.get("button[aria-label='add to favorites']").eq(1).click();
             cy.get("button[aria-label='add to favorites']").eq(3).click();
-            cy.get("button").contains("Favorites").click();
+            cy.get("button").contains("MY").click()
+            cy.get('li')
+                .next()
+                .get('a[href="/movies/favorites"]')
+                .eq(0)
+                .click()
+            cy.get(".MuiBackdrop-root").click("center")
 
             // 用垃圾桶（remove）图标定位review
             cy.get('button[aria-label="remove from favorites"]')
@@ -52,7 +58,7 @@ describe('review test', () => {
                 cy.get('input[name="author"]').type('hpl');
                 cy.get('textarea[name="review"]').type('my all time favourite movie !!!!!!!!!');
                 cy.get("#select-rating").click();
-                cy.get("li").eq(0).click(); // 选择第一个5分
+                cy.get("li").contains("Excellent").click(); // 选择第一个5分
 
                 // 点击重置按钮
                 cy.get('button[type="reset"]').click();
