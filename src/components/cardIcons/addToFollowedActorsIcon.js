@@ -4,6 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Icon from '@mui/material/Icon';
 import Button from "@mui/material/Button";
+import handleRemoveFromFollowed from './removeFromFollowed'
 
 const AddToFollowedActorsIcon = ({ actor }) => {
     const context = useContext(ActorsContext);
@@ -27,7 +28,7 @@ const AddToFollowedActorsIcon = ({ actor }) => {
                         color: isFollowing ? 'red' : 'default',
                         borderColor: isFollowing ? 'red' : 'default'
                     }}>
-                Follow
+                {isFollowing ? 'Unfollow' : 'Follow'}
             </Button>
         </IconButton>
     );

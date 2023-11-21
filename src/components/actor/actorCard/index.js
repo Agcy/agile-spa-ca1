@@ -34,7 +34,7 @@ export default function ActorCard({ actor, action }) {
                             {actor && actor.name ? actor.name.charAt(0) : '?'}
                         </Avatar>
                     ) : (
-                        <Avatar sx={{ backgroundColor: 'default'}}>
+                        <Avatar>
                             {/* 演员的首字母或其他标识 */}
                             {actor && actor.name ? actor.name.charAt(0) : '?'}
                         </Avatar>
