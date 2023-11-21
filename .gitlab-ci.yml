@@ -4,6 +4,8 @@ stages:
   - test
   - e2e_test
 
+image: node:latest
+
 variables:
   npm_config_cache: "$CI_PROJECT_DIR/.npm"
   CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/cache/Cypress"
