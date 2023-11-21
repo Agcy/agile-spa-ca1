@@ -1,0 +1,51 @@
+stages:
+  - install_dependencies
+  - build
+  - test
+  - e2e_test
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+  CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/cache/Cypress"
+
+cache:
+  key:
+    files:
+      - package.json
+  paths:
+    - .npm
+    - cache/Cypress
+    - node_modules
+    - build
+
+install_dependencies_job:
+  stage: install_dependencies
+  script:
+    - npm ci --cache .npm --prefer-offline
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 hour
+
+build_job:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 hour
+  only:
+    - main
+
+e2e_test_job:
+  stage: e2e_test
+  script:
+    - echo "Run tests in headless mode"
+    - npx serve -s ./build  -l 3000  &
+    - npx cypress run --browser chrome
+  only:
+    - main
+    - merge_requests
+
+
