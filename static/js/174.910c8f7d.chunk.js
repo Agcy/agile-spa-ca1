@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmovies=self.webpackChunkmovies||[]).push([[174],{5174:function(e,r,o){o.r(r);var i=o(2791),n=o(3400),t=o(7247),a=o(2312),s=o(184);r.default=function(e){var r=e.movie,o=(0,i.useContext)(a.m);return(0,s.jsx)(n.Z,{"aria-label":"remove from favorites",onClick:function(e){e.preventDefault(),o.removeFromFavorites(r)},children:(0,s.jsx)(t.Z,{color:"primary",fontSize:"large"})})}}}]);
+//# sourceMappingURL=174.910c8f7d.chunk.js.map
