@@ -1,6 +1,6 @@
 # Assignment 1 - Agile Software Practice.
 
-__Name:__ ....your name .....
+__Name:__ Haoepeng Liang
 
 This repository contains the implementation of a React App, its associated Cypress tests and the GitLab CI pipeline.
 
