@@ -1,49 +1,48 @@
-import React, { useContext } from "react";
+import React, { lazy, useContext, useMemo, Suspense } from "react";
 import PageTemplate from "../components/movie/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
 import { getMovie } from "../api/tmdb-api";
-import Spinner from '../components/spinner';
-import RemoveFromPreviews from "../components/cardIcons/removeFromPreviews";
-// import WriteReview from "../components/cardIcons/writeReview";
+const Spinner = lazy(() => import('../components/spinner'));
+const RemoveFromPreviews = lazy(() => import("../components/cardIcons/removeFromPreviews"));
 
 const MarkedMoviesPage = () => {
-  const {previews: movieIds } = useContext(MoviesContext);
+    const { previews: movieIds } = useContext(MoviesContext);
 
-  // Create an array of queries and run in parallel.
-  const previewMovieQueries = useQueries(
-    movieIds.map((movieId) => {
-      return {
-        queryKey: ["movie", { id: movieId }],
-        queryFn: getMovie,
-      };
-    })
-  );
-  // Check if any of the parallel queries is still loading.
-  const isLoading = previewMovieQueries.find((m) => m.isLoading === true);
+    const previewMovieQueries = useQueries(
+        movieIds.map((movieId) => ({
+            queryKey: ["movie", { id: movieId }],
+            queryFn: getMovie,
+        }))
+    );
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+    const isLoading = previewMovieQueries.some((m) => m.isLoading);
 
-  const movies = previewMovieQueries.map((q) => {
-    q.data.genre_ids = q.data.genres.map(g => g.id)
-    return q.data
-  });
+    // 使用 useMemo 来优化数据处理
+    const movies = useMemo(() => previewMovieQueries.map((q) => {
+        if (q.data) {
+            return { ...q.data, genre_ids: q.data.genres.map(g => g.id) };
+        }
+        return null;
+    }).filter(Boolean), [previewMovieQueries]);
 
-  const toDo = () => true;
+    if (isLoading) {
+        return <Spinner />;
+    }
 
-  return (
-    <PageTemplate
-      title="Marked Movies"
-      movies={movies}
-      action={(movie) => {
-        return (
+    const movieActions = (movie) => (
+        <Suspense fallback={<Spinner />}>
             <RemoveFromPreviews movie={movie} />
-        );
-      }}
-    />
-  );
+        </Suspense>
+    );
+
+    return (
+        <PageTemplate
+            title="Marked Movies"
+            movies={movies}
+            action={movieActions}
+        />
+    );
 };
 
 export default MarkedMoviesPage;

@@ -1,10 +1,10 @@
-import React from "react";
+import React, {lazy} from "react";
 import PageTemplate from "../components/movie/templateMoviePage";
 import ReviewForm from "../components/reviewForm";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getMovie } from "../api/tmdb-api";
-import Spinner from "../components/spinner";
+const Spinner = lazy(() => import('../components/spinner')) ;
 
 const WriteReviewPage = (props) => {
   const location = useLocation();

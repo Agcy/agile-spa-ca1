@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, lazy} from "react";
 import ActorHeader from "../headerActor"; // 假设有 ActorHeader 组件
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -6,9 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {getActorImages, getActorMovieCredits} from "../../../api/tmdb-api";
-import RelativeMoviesList from "../../relativeInfomation/relativeMoviesList";
+import RelativeMoviesList from "../../relativeInformation/relativeMoviesList";
 import { useQuery } from "react-query";
-import Spinner from '../../spinner';
+const Spinner = lazy(() => import('../../spinner')) ;
 
 const TemplateActorPage = ({ actor, children }) => {
 

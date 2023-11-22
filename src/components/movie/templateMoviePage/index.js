@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, lazy} from "react";
 import MovieHeader from "../headerMovie";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
@@ -8,9 +8,9 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { getMovieImages, getMovieCredits } from "../../../api/tmdb-api";
-import RelativeActorsList from "../../relativeInfomation/relativeActorsList";
+import RelativeActorsList from "../../relativeInformation/relativeActorsList";
 import { useQuery } from "react-query";
-import Spinner from '../../spinner'
+const Spinner = lazy(() => import('../../spinner')) ;
 
 const TemplateMoviePage = ({ movie, children }) => {
 

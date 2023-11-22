@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Suspense} from "react";
 import {createRoot} from "react-dom/client";
 import {BrowserRouter, Route, Navigate, Routes} from "react-router-dom";
 import HomePage from "./pages/homePage";
@@ -35,20 +35,22 @@ const App = () => {
                 <SiteHeader/>
                 <MoviesContextProvider>
                     <ActorsProvider>
-                        <Routes>
-                            <Route path="/movies/favorites" element={<FavoriteMoviesPage/>}/>
-                            <Route path="/movies/marked" element={<MarkedMoviesPage/>}/>
-                            <Route path="/movies/upcoming" element={<UpcomingMoviePage/>}/>
-                            <Route path="/movies/trending" element={<TrendingMoviePage/>}/>
-                            <Route path="/actors" element={<ActorListPage/>}/>
-                            <Route path="/actors/followed" element={<FollowedActorsPage/>}/>
-                            <Route path="/actors/:id" element={<ActorDetailsPage/>}/>
-                            <Route path="/reviews/:id" element={<MovieReviewPage/>}/>
-                            <Route path="/reviews/form" element={<AddMovieReviewPage/>}/>
-                            <Route path="/movies/:id" element={<MoviePage/>}/>
-                            <Route path="/" element={<HomePage/>}/>
-                            <Route path="*" element={<Navigate to="/"/>}/>
-                        </Routes>
+                        <Suspense>
+                            <Routes>
+                                <Route path="/movies/favorites" element={<FavoriteMoviesPage/>}/>
+                                <Route path="/movies/marked" element={<MarkedMoviesPage/>}/>
+                                <Route path="/movies/upcoming" element={<UpcomingMoviePage/>}/>
+                                <Route path="/movies/trending" element={<TrendingMoviePage/>}/>
+                                <Route path="/actors" element={<ActorListPage/>}/>
+                                <Route path="/actors/followed" element={<FollowedActorsPage/>}/>
+                                <Route path="/actors/:id" element={<ActorDetailsPage/>}/>
+                                <Route path="/reviews/:id" element={<MovieReviewPage/>}/>
+                                <Route path="/reviews/form" element={<AddMovieReviewPage/>}/>
+                                <Route path="/movies/:id" element={<MoviePage/>}/>
+                                <Route path="/" element={<HomePage/>}/>
+                                <Route path="*" element={<Navigate to="/"/>}/>
+                            </Routes>
+                        </Suspense>
                     </ActorsProvider>
                 </MoviesContextProvider>
             </BrowserRouter>

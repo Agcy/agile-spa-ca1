@@ -1,52 +1,49 @@
-import React, { useContext } from "react";
+import React, { lazy, useContext, useMemo, Suspense } from "react";
 import PageTemplate from "../components/movie/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
 import { getMovie } from "../api/tmdb-api";
-import Spinner from '../components/spinner';
-import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
-import WriteReview from "../components/cardIcons/writeReview";
+const Spinner = lazy(() => import('../components/spinner'));
+const RemoveFromFavorites = lazy(() => import("../components/cardIcons/removeFromFavorites"));
+const WriteReview = lazy(() => import("../components/cardIcons/writeReview"));
 
 const FavoriteMoviesPage = () => {
-  const {favorites: movieIds } = useContext(MoviesContext);
+    const { favorites: movieIds } = useContext(MoviesContext);
 
-  // Create an array of queries and run in parallel.
-  const favoriteMovieQueries = useQueries(
-    movieIds.map((movieId) => {
-      return {
-        queryKey: ["movie", { id: movieId }],
-        queryFn: getMovie,
-      };
-    })
-  );
-  // Check if any of the parallel queries is still loading.
-  const isLoading = favoriteMovieQueries.find((m) => m.isLoading === true);
+    const favoriteMovieQueries = useQueries(
+        movieIds.map((movieId) => ({
+            queryKey: ["movie", { id: movieId }],
+            queryFn: getMovie,
+        }))
+    );
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+    const isLoading = favoriteMovieQueries.some((m) => m.isLoading);
 
-  const movies = favoriteMovieQueries.map((q) => {
-    q.data.genre_ids = q.data.genres.map(g => g.id)
-    return q.data
-  });
+    const movies = useMemo(() => favoriteMovieQueries.map((q) => {
+        if (q.data) {
+            return { ...q.data, genre_ids: q.data.genres.map(g => g.id) };
+        }
+        return null;
+    }).filter(Boolean), [favoriteMovieQueries]);
 
-  const toDo = () => true;
+    if (isLoading) {
+        return <Spinner />;
+    }
 
-  return (
-    <PageTemplate
-      title="Favorite Movies"
-      movies={movies}
-      action={(movie) => {
-        return (
-          <>
+    const movieActions = (movie) => (
+        <Suspense fallback={<Spinner />}>
             <RemoveFromFavorites movie={movie} />
             <WriteReview movie={movie} />
-          </>
-        );
-      }}
-    />
-  );
+        </Suspense>
+    );
+
+    return (
+        <PageTemplate
+            title="Favorite Movies"
+            movies={movies}
+            action={movieActions}
+        />
+    );
 };
 
 export default FavoriteMoviesPage;

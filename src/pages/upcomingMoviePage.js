@@ -1,9 +1,9 @@
-import React from "react";
+import React, {lazy} from "react";
 import { getUpcomingMovie } from "../api/tmdb-api";
 import PageTemplate from '../components/movie/templateMovieListPage'
 import AddToPreviewsIcon from '../components/cardIcons/addToPreviews'
 import { useQuery } from 'react-query';
-import Spinner from '../components/spinner';
+const Spinner = lazy(() => import('../components/spinner')) ;
 
 const UpcomingMoviePage = (props) => {
   const {  data, error, isLoading, isError }  = useQuery('upcoming', getUpcomingMovie)

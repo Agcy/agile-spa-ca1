@@ -1,9 +1,9 @@
-import React from "react";
+import React, {lazy} from "react";
 import { getPopularActors } from "../api/tmdb-api";
 import ActorListPageTemplate from '../components/actor/templeteActorListPage'
 import AddToPreviewsIcon from '../components/cardIcons/addToPreviews'
 import { useQuery } from 'react-query';
-import Spinner from '../components/spinner';
+const Spinner = lazy(() => import('../components/spinner')) ;
 import AddToFollowedActorsIcon from "../components/cardIcons/addToFollowedActorsIcon";
 
 const ActorListPage = (props) => {

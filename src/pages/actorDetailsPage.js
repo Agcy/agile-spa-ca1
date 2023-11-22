@@ -1,10 +1,10 @@
-import React from "react";
+import React, {lazy} from "react";
 import { useParams } from 'react-router-dom';
 import ActorDetails from "../components/actor/actorDetails/";
 import TemplateActorPage from "../components/actor/templateActorPage";
 import { getActor } from '../api/tmdb-api'
 import { useQuery } from "react-query";
-import Spinner from '../components/spinner';
+const Spinner = lazy(() => import('../components/spinner')) ;
 
 const ActorPage = () => {
     const { id } = useParams();

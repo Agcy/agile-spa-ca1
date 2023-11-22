@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React, {lazy, useContext} from "react";
 import { ActorsContext } from "../contexts/actorsContext";
 import PageTemplate from "../components/actor/templeteActorListPage";
 import { useQueries } from "react-query";
 import {getActor} from "../api/tmdb-api";
-import Spinner from '../components/spinner';
+const Spinner = lazy(() => import('../components/spinner')) ;
 import RemoveFromFollowed from "../components/cardIcons/removeFromFollowed";
 
 const FollowedActorsPage = () => {

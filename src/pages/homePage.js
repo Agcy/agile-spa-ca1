@@ -1,9 +1,9 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { getMovies } from "../api/tmdb-api";
-import PageTemplate from '../components/movie/templateMovieListPage';
+const PageTemplate = lazy(() => import('../components/movie/templateMovieListPage')) ;
 import { useQuery } from 'react-query';
-import Spinner from '../components/spinner';
-import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+const Spinner = lazy(() => import('../components/spinner')) ;
+const AddToFavoritesIcon = lazy(() => import('../components/cardIcons/addToFavorites'));
 
 const HomePage = (props) => {
 
